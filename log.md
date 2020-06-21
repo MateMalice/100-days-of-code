@@ -12,12 +12,13 @@
 
 **Today's Progress**: Today, I finished configuring my environment and the various packages needed, including Tensorflow, Keras, Matplotlib, Theano, Numpy, nltk, scikit-learn, pandas. I made sure they all worked and configured them.
 
-**Thoughts:** The book was written a few years ago, so some instructions and code samples are out of date. This is especially the case with the TensorFlow documentation. However, I eventually did get everything working after some searches, including with GPU integration.
+**Thoughts:** The book was written a few years ago, so some instructions and code samples are out of date. This is especially the case with the TensorFlow documentation. However, I eventually did get everything working after some Google & Github searches and by reading the TensorFlow docs, including with GPU integration for TF.
 
-**Link to work:** Jupyter notebook output showing tests of packages:
+**Link to work:** Jupyter Notebook input and output showing tests of packages:
 
 ```python
 # Test Tensorflow
+# NOTE: This one required searches because the book used a different version of Python and TensorFlow, so the original instructions in the book threw an exception. I needed to use TensorFlow v1 compatibility versions of the functions.
 import tensorflow as tf
 with tf.compat.v1.Session() as sess:
     # Build a graph
@@ -115,5 +116,8 @@ print(f)
 
 
 ```python
-
+# Download NLTK packages
+import nltk
+nltk.download()
+# This didn't work in a Jupyter Notebook, though when run from the command line, it did open the window prompt for downloading the NLTK packages.
 ```
