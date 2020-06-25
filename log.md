@@ -332,3 +332,10 @@ Kmean.predict(second_test)
 ```python
 
 ```
+### Day 3: 24 June 2020
+
+**Today's Progress**: I skipped a day due to being too busy with work, but continued this evening with an analysis of the Boston Housing Dataset using Pandas and scikit-learn - namely, linear and polynomial regression. I also used matplotlib and Seaborn to show various graphs, both to visualise the data and visualise confidence intervals and errors. 
+
+**Thoughts:**: Although numeric representations of mean squared error values and the like can be helpful, having a visual graph helps reveal things that a set of numbers might not easily show. For example, the Boston Housing Dataset's median house price value had a capped top bin at $50k, which created some obvious patterns. Also, the benefits of using polynomial regression rather than linear regression for this problem were far more obvious when the lines and scatter plots were graphed, as the graphs showed that the polynomial line matched more nicely. The MSE was lower too, but displaying things visually helps.
+
+**Link to work:** Due to this file getting too long, I am going to start posting the Jupyter Notebook output separately starting with this one. See [boston-housing-dataset-analysis.md].
