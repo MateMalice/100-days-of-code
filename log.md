@@ -332,8 +332,14 @@ Kmean.predict(second_test)
 ```python
 
 ```
-### Day 3: 24 June 2020
+### Day 3: 23 June 2020
+**Today's Progress**: I spent today playing with Jupyter Notebook and Python on the couch using my Google Pixel 3. I did do a bit of data analysis and learned how to use Jupyter magic expressions and other features I didn't previously know about (thanks to a book I decided to do to increase my skills with using Jupyter Notebooks - see link below for day 4). Mostly I just tested out the features on a mobile platform, though.
 
+**Thoughts:**: It is much easier to do this kind of work on a PC with a larger screen, but the rooted Pixel performed well and the main limitations were screen and keyboard size. I haven't yet tried to do any hardcore data analysis on it, but TensorFlow and other libraries seemed to work and I will go back to playing with the mobile device when I get into the substantive topic of this journey, which is machine learning for pentesting and threat detection. I think that it'll be important to design at least some models for mobile platforms, given their ubiquity these days.
+
+**Link to work:** This day mostly involved me playing with Jupyter on my phone, but I did [tweet about it](https://twitter.com/MateMalice/status/1275455680447541248).
+
+### Day 4: 25 June 2020
 **Today's Progress**: I skipped a day due to being too busy with work, but continued this evening with an analysis of the Boston Housing Dataset using Pandas and scikit-learn - namely, linear and polynomial regression. I also used matplotlib and Seaborn to show various graphs, both to visualise the data and visualise confidence intervals and errors. 
 
 **Thoughts:**: Although numeric representations of mean squared error values and the like can be helpful, having a visual graph helps reveal things that a set of numbers might not easily show. For example, the Boston Housing Dataset's median house price value had a capped top bin at $50k, which created some obvious patterns. Also, the benefits of using polynomial regression rather than linear regression for this problem were far more obvious when the lines and scatter plots were graphed, as the graphs showed that the polynomial line matched more nicely. The MSE was lower too, but displaying things visually helps.
