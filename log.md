@@ -338,4 +338,4 @@ Kmean.predict(second_test)
 
 **Thoughts:**: Although numeric representations of mean squared error values and the like can be helpful, having a visual graph helps reveal things that a set of numbers might not easily show. For example, the Boston Housing Dataset's median house price value had a capped top bin at $50k, which created some obvious patterns. Also, the benefits of using polynomial regression rather than linear regression for this problem were far more obvious when the lines and scatter plots were graphed, as the graphs showed that the polynomial line matched more nicely. The MSE was lower too, but displaying things visually helps.
 
-**Link to work:** Due to this file getting too long, I am going to start posting the Jupyter Notebook output separately starting with this one. See [boston-housing-dataset-analysis.md].
+**Link to work:** Due to this file getting too long, I am going to start posting the Jupyter Notebook output separately starting with this one. See [boston-housing-dataset-analysis.md](https://github.com/MateMalice/100-days-of-code/blob/master/boston-housing-dataset-analysis.md) in this repo.
