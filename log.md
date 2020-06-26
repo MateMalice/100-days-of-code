@@ -345,3 +345,11 @@ Kmean.predict(second_test)
 **Thoughts:**: Although numeric representations of mean squared error values and the like can be helpful, having a visual graph helps reveal things that a set of numbers might not easily show. For example, the Boston Housing Dataset's median house price value had a capped top bin at $50k, which created some obvious patterns. Also, the benefits of using polynomial regression rather than linear regression for this problem were far more obvious when the lines and scatter plots were graphed, as the graphs showed that the polynomial line matched more nicely. The MSE was lower too, but displaying things visually helps.
 
 **Link to work:** Due to this file getting too long, I am going to start posting the Jupyter Notebook output separately starting with this one. See [boston-housing-dataset-analysis.md](https://github.com/MateMalice/100-days-of-code/blob/master/boston-housing-dataset-analysis.md) in this repo.
+
+
+### Day 5: 26 June 2020
+**Today's Progress**: I learned how to do violin graphs. I also recapped the material from the previous day to reinforce my knowledge of how to use Seaborn, sklearn, etc. for regression and error calculation, but I looked at NOX - MEDV relationships and AGE - NOX relationships, which were not considered before.
+
+**Thoughts:**: This exercise ultimately showed too much variance for both polynomial and regression models. I didn't bother doing a violin model for this (I will likely use these and colour coding with other data that shows a stronger statistical correlation). Interestingly, for AGE - NOX, variance increased substantially with age. The exercise did show me that even though initial models might show a line or a cluster, it's important to calculate MSE and plot variances before drawing conclusions, as a graph might look persuasive, but not actually show data that has a strong enough correlation.
+
+**Link to work:** Due to this file getting too long, I am going to start posting the Jupyter Notebook output separately starting with this one. See [boston-housing-dataset-analysis.md](https://github.com/MateMalice/100-days-of-code/blob/master/boston-housing-dataset-analysis.md) in this repo.
