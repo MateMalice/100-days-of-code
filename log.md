@@ -352,4 +352,11 @@ Kmean.predict(second_test)
 
 **Thoughts:**: This exercise ultimately showed too much variance for both polynomial and regression models. I didn't bother doing a violin model for this (I will likely use these and colour coding with other data that shows a stronger statistical correlation). Interestingly, for AGE - NOX, variance increased substantially with age. The exercise did show me that even though initial models might show a line or a cluster, it's important to calculate MSE and plot variances before drawing conclusions, as a graph might look persuasive, but not actually show data that has a strong enough correlation.
 
-**Link to work:** Due to this file getting too long, I am going to start posting the Jupyter Notebook output separately starting with this one. See [boston-housing-dataset-analysis.md](https://github.com/MateMalice/100-days-of-code/blob/master/boston-housing-dataset-analysis.md) in this repo.
+**Link to work:** See [boston-housing-dataset-analysis.md](https://github.com/MateMalice/100-days-of-code/blob/master/boston-housing-dataset-analysis.md) in this repo.
+
+### Day 6: 30 June 2020
+**Today's Progress**: After a brief hiatus due to a work release, I have started again, using a Jupyter Notebook to learn how to pre-process collected data.
+
+**Thoughts:**: There seem to be great functions for bulk data cleaning and transformation. Need to read the documentation.
+
+**Link to work:** See [data-preprocessing.md](https://github.com/MateMalice/100-days-of-code/blob/master/data-preprocessing.md) in this repo.
