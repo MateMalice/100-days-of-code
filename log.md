@@ -360,3 +360,10 @@ Kmean.predict(second_test)
 **Thoughts:**: There seem to be great functions for bulk data cleaning and transformation. Need to read the documentation.
 
 **Link to work:** See [data-preprocessing.md](https://github.com/MateMalice/100-days-of-code/blob/master/data-preprocessing.md) in this repo.
+
+### Day 7: 6 July 2020
+**Today's Progress**: Due to a busy time at work, there were several days when I couldn't put the time in. I need to remember that it's just an hour a day. Today, I did some more practice with data-cleaning and NaN filling tools in Pandas, plus I learned about several classification algorithms for the purposes of doing the employee retention problem.
+
+**Thoughts**: It is good to practice these functions as they get easier over time, especially when using a Jupyter Notebook.
+
+**Link to work:** See [data_hr_analytics_packt_tutorial.md](https://github.com/MateMalice/100-days-of-code/blob/master/data_hr_analytics_packt_tutorial.md) up to the section where I discuss Support Vector Machines, k-Nearest-Neighbours and Random Forests, which I learned a bit about and summarised in there.
