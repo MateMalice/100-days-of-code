@@ -367,3 +367,12 @@ Kmean.predict(second_test)
 **Thoughts**: It is good to practice these functions as they get easier over time, especially when using a Jupyter Notebook.
 
 **Link to work:** See [data_hr_analytics_packt_tutorial.md](https://github.com/MateMalice/100-days-of-code/blob/master/data_hr_analytics_packt_tutorial.md) up to the section where I discuss Support Vector Machines, k-Nearest-Neighbours and Random Forests, which I learned a bit about and summarised in there.
+
+### Day 8: 7 July 2020
+**Today's Progress**: Today new PC parts got delivered, so after building and setting up my new machine, I installed TensorFlow and tested image classification on the GPU. I'll continue from where I left off on Day 7's progress tomorrow, as today I needed to get things installed and confirm that they were working.
+
+**Thoughts**: The new PC is much faster than the old one and will really speed a lot of things up.
+
+**Link to work:** See [tensorflow-image-classification-test.md](https://github.com/MateMalice/100-days-of-code/blob/master/tensorflow-image-classification-test.md).
+
+
