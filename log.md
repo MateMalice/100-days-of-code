@@ -376,3 +376,9 @@ Kmean.predict(second_test)
 **Link to work:** See [tensorflow-image-classification-test.md](https://github.com/MateMalice/100-days-of-code/blob/master/tensorflow-image-classification-test.md).
 
 
+### Day 9: 9 July 2020
+**Today's Progress**: Today, I continued with the HR Data Analytics exercise (the employee retention problem). Namely, I learned about Support Vector Machines (the first of the three models that I will use the analyse this data) and applied this to the data. 
+
+**Thoughts**: This dataset is unbalanced in terms of the distribution between the "left" and "remained" categories - we have significantly more data for the employees that haven't left. This has clearly affected the analysis. When using a linear SVM, all the predictions came back as "remained". A kernel trick did make the predictions more accurate, but the accuracy was still much higher for "remained" employees. It seems that the more data you have and the more balanced it is with respect to the target features, the easier it might be to develop an accurate model. I will be checking this hypothesis as I proceed through the various machine learning materials.
+
+**Link to work:** See [data_hr_analytics_packt_tutorial.md](https://github.com/MateMalice/100-days-of-code/blob/master/data_hr_analytics_packt_tutorial.md) after the 9 July 2020 heading and up to the SVM section and just before the k-Nearest Neighbours section.
