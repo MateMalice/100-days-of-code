@@ -1,5 +1,4 @@
 ## Human Resource Analytics
-
 Demonstration of data cleaning and problem solving using the [Human Resource Analytics data set from Kaggle](https://www.kaggle.com/cezarschroeder/human-resource-analytics-dataset/data).
 
 ### Step 1: Examine the data and plan
@@ -9,7 +8,7 @@ First, look at the data to determine a plan for cleaning and analysing it.
 ```python
 # Load the data using Pandas
 import pandas as pd
-df = pd.read_csv('./datasets_146523_341407_hr_data.csv')
+df = pd.read_csv('./hr_data.csv')
 ```
 
 
@@ -37,19 +36,6 @@ df.head()
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -153,19 +139,6 @@ df.tail()
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -263,7 +236,7 @@ df.tail()
 
 ```python
 # Check the number of rows - make sure we got them all
-with open('./datasets_146523_341407_hr_data.csv') as f:
+with open('./hr_data.csv') as f:
     print(len(f.read().splitlines()))
 ```
 
@@ -330,26 +303,9 @@ df.dtypes
 
 
 ```python
-import matplotlib as plt
-for feat in df.columns:
-    print('Non-null Count:\t', feat, "\t", df[feat].count())
-
 # Check proportion of NaNs
 df.isnull().sum() / len(df) * 100
 ```
-
-    Non-null Count:	 satisfaction_level 	 14999
-    Non-null Count:	 last_evaluation 	 14999
-    Non-null Count:	 number_project 	 14999
-    Non-null Count:	 average_montly_hours 	 14631
-    Non-null Count:	 time_spend_company 	 14848
-    Non-null Count:	 work_accident 	 14999
-    Non-null Count:	 left 	 14999
-    Non-null Count:	 promotion_last_5years 	 14999
-    Non-null Count:	 is_smoker 	 235
-    Non-null Count:	 department 	 14999
-    Non-null Count:	 salary 	 14999
-    
 
 
 
@@ -367,6 +323,67 @@ df.isnull().sum() / len(df) * 100
     salary                    0.000000
     dtype: float64
 
+
+
+
+```python
+# Print the distibutions
+import matplotlib.pyplot as plt
+for f in df.columns:
+    try:
+        fig = plt.figure()
+        num_bins = min((30, len(df[f].unique())))
+        df[f].hist(bins=num_bins)
+        plt.xlabel(f)
+    except TypeError:
+        print()
+        print(df[f].value_counts())
+        print('-'*30)
+        plt.close()
+```
+
+
+![png](output_11_0.png)
+
+
+
+![png](output_11_1.png)
+
+
+
+![png](output_11_2.png)
+
+
+
+![png](output_11_3.png)
+
+
+
+![png](output_11_4.png)
+
+
+
+![png](output_11_5.png)
+
+
+
+![png](output_11_6.png)
+
+
+
+![png](output_11_7.png)
+
+
+
+![png](output_11_8.png)
+
+
+
+![png](output_11_9.png)
+
+
+
+![png](output_11_10.png)
 
 
 
@@ -395,12 +412,12 @@ sns.boxplot(x='number_project', y='average_montly_hours', data=df)
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x2ad3ea18fc8>
+    <matplotlib.axes._subplots.AxesSubplot at 0x1c667b45488>
 
 
 
 
-![png](output_13_1.png)
+![png](output_14_1.png)
 
 
 
@@ -464,19 +481,6 @@ df.head()
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -641,19 +645,6 @@ df.tail()
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -835,6 +826,246 @@ Training a random forest involves creating bootstrapped datasets for several dec
 **Other benefits of decision trees include that you can model a mix of continuous and categorical data, plus tree depth can be limited to reduce overfitting.** See [this StackOverflow thread](https://stackoverflow.com/a/1859910/3511819), which also describes concepts like node purity, information gain and entropy.
 
 
-```python
+## Continuing on 9 July 2020
 
+First, draw some more distribution graphs and then use the above algorithms to try find a solution to the problem. We will be training classification models using two continuous features - satisfaction_level and last_evaluation.
+
+
+```python
+# Bivariate and univariate distributon graphs of satisfaction_level and last_evaluation
+sns.jointplot('satisfaction_level', 'last_evaluation', data=df, kind='hex')
 ```
+
+
+
+
+    <seaborn.axisgrid.JointGrid at 0x1c668ccefc8>
+
+
+
+
+![png](output_24_1.png)
+
+
+
+```python
+# Re-plot the bivariate distribution, segmenting on the target variable
+plot_args = dict(shade=True, shade_lowest=False)
+for i, c in zip((0, 1), ('Reds', 'Blues')):
+    sns.kdeplot(df.loc[df.left==i, 'satisfaction_level'],
+                df.loc[df.left==i, 'last_evaluation'],
+                cmap=c, **plot_args)
+```
+
+
+![png](output_25_0.png)
+
+
+#### Discussion
+These graphs show some clear patterns, which can be used to train classification models. People with higher satisfaction levels tend to be less likely to leave, though there are some points in the data where the intersection of satisfaction_level and last_evaluation make leaving more likely (see blue circles).
+
+We now need to split the data into training and test sets. We can then train models, starting with **support vector machines**.
+
+
+```python
+# Split the data into training and testing sets
+from sklearn.model_selection import train_test_split
+features = ['satisfaction_level', 'last_evaluation']
+X_train, X_test, y_train, y_test = train_test_split(df[features].values, df['left'].values,
+    test_size=0.3, random_state=1)
+```
+
+
+```python
+# SVMs and k-Nearest Neighbours are most efficient when input data is scaled so that all the features are on the same order.
+# sklearn has a StandardScaler that allows this.
+from sklearn.preprocessing import StandardScaler
+scaler = StandardScaler()
+X_train_std = scaler.fit_transform(X_train)
+X_test_std = scaler.transform(X_test)
+# Note that we aren't fitting the scaler on the test data - only the training data. We don't want our model training to be influeced by the test data.
+```
+
+
+```python
+# Import scikit-learn's SVM class and fit the model
+from sklearn.svm import SVC
+svm = SVC(kernel='linear', C=1, random_state=1)
+svm.fit(X_train_std, y_train)
+# The C parameter controls the penalty for misclassification so that variance and bias can be controlled
+```
+
+
+
+
+    SVC(C=1, kernel='linear', random_state=1)
+
+
+
+
+```python
+# Compute the accuracy of the model on unseen data
+from sklearn.metrics import accuracy_score
+y_pred = svm.predict(X_test_std)
+acc = accuracy_score(y_test, y_pred)
+print('accuracy = {:.1f}%'.format(acc*100))
+```
+
+    accuracy = 75.9%
+    
+
+
+```python
+# Calculate the confusion matrix and then determine the accuracy within each class
+from sklearn.metrics import confusion_matrix
+cmatrix = confusion_matrix(y_test, y_pred)
+scores = cmatrix.diagonal() / cmatrix.sum(axis=1) * 100
+print('left = 0 : {:.2f}%'.format(scores[0]))
+print('left = 1 : {:.2f}%'.format(scores[1]))
+```
+
+    left = 0 : 100.00%
+    left = 1 : 0.00%
+    
+
+
+```python
+# The model is clearly classifying every sample as a zero, which is not helpful.
+# We can use a contour plot to show the predicted calss at each feature space point
+# Known as the decision-regions plot.
+from mlxtend.plotting import plot_decision_regions
+N_samples = 200
+X, y = X_train_std[:N_samples], y_train[:N_samples]
+plot_decision_regions(X, y, clf=svm)
+```
+
+    C:\Users\MateMalice\.conda\envs\machine-learning\lib\site-packages\mlxtend\plotting\decision_regions.py:247: UserWarning: No contour levels were found within the data range.
+      antialiased=True)
+    C:\Users\MateMalice\.conda\envs\machine-learning\lib\site-packages\mlxtend\plotting\decision_regions.py:249: MatplotlibDeprecationWarning: Passing unsupported keyword arguments to axis() will raise a TypeError in 3.3.
+      ax.axis(xmin=xx.min(), xmax=xx.max(), y_min=yy.min(), y_max=yy.max())
+    
+
+
+
+
+    <matplotlib.axes._subplots.AxesSubplot at 0x1c66a12ebc8>
+
+
+
+
+![png](output_32_2.png)
+
+
+
+```python
+# It's obvious why everything was being classified as zero given the above distribution.
+# We can use a kernel trick to classify non-linear problems. Instead of using the linear kernel (above), use rbf
+svm = SVC(kernel='rbf', C=1, random_state=1)
+svm.fit(X_train_std, y_train)
+```
+
+
+
+
+    SVC(C=1, random_state=1)
+
+
+
+
+```python
+# Declare a function for checking model fit
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import confusion_matrix
+from IPython.display import display
+from mlxtend.plotting import plot_decision_regions
+
+def check_model_fit(clf, X_test, y_test):
+    # Print overall test-set accuracy
+    y_pred = clf.predict(X_test)
+    acc = accuracy_score(y_test, y_pred, normalize=True) * 100
+    print('total accuracy = {:.1f}%'.format(acc))
+    
+    # Print confusion matrix
+    cmat = confusion_matrix(y_test, y_pred)
+    cols = pd.MultiIndex.from_tuples([('predictions', 0), ('predictions', 1)])
+    indx = pd.MultiIndex.from_tuples([('actual', 0), ('actual', 1)])
+    display(pd.DataFrame(cmat, columns=cols, index=indx))
+    print()
+    
+    # Print test-set accuracy grouped by the target variable 
+    print('percent accuracy score per class:')
+    cmat = confusion_matrix(y_test, y_pred)
+    scores = cmat.diagonal() / cmat.sum(axis=1) * 100
+    print('left = 0 : {:.2f}%'.format(scores[0]))
+    print('left = 1 : {:.2f}%'.format(scores[1]))
+    print()
+    
+    # Plot decision regions
+    fig = plt.figure(figsize=(8, 8))
+    N_samples = 200
+    X, y = X_test[:N_samples], y_test[:N_samples]
+    plot_decision_regions(X, y, clf=clf)
+    
+    plt.xlabel('satisfaction_level')
+    plt.ylabel('last_evaluation')
+    plt.legend(loc='upper left')
+    
+# Run it
+check_model_fit(svm, X_test_std, y_test)
+```
+
+    total accuracy = 89.7%
+    
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th colspan="2" halign="left">predictions</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="2" valign="top">actual</th>
+      <th>0</th>
+      <td>3308</td>
+      <td>108</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>354</td>
+      <td>730</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+    
+    percent accuracy score per class:
+    left = 0 : 96.84%
+    left = 1 : 67.34%
+    
+    
+
+    C:\Users\MateMalice\.conda\envs\machine-learning\lib\site-packages\mlxtend\plotting\decision_regions.py:249: MatplotlibDeprecationWarning: Passing unsupported keyword arguments to axis() will raise a TypeError in 3.3.
+      ax.axis(xmin=xx.min(), xmax=xx.max(), y_min=yy.min(), y_max=yy.max())
+    
+
+
+![png](output_34_4.png)
+
+
+### Discussion
+This is more accurate than the model that didn't use the rbf kernel trick - it did classify some of the employees in the Left category. However, accuracy is still much lower for the left category. From looking at the data distribution, we have much less data for employees in the "left" category, so the lower accuracy is not surprising.
+
+The next step will be training k-Nearest Neighbours, which I'll do tomorrow.
