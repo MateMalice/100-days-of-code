@@ -412,7 +412,7 @@ sns.boxplot(x='number_project', y='average_montly_hours', data=df)
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x1c667b45488>
+    <matplotlib.axes._subplots.AxesSubplot at 0x1f2d29c25c8>
 
 
 
@@ -839,7 +839,7 @@ sns.jointplot('satisfaction_level', 'last_evaluation', data=df, kind='hex')
 
 
 
-    <seaborn.axisgrid.JointGrid at 0x1c668ccefc8>
+    <seaborn.axisgrid.JointGrid at 0x1f2d1759548>
 
 
 
@@ -948,7 +948,7 @@ plot_decision_regions(X, y, clf=svm)
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x1c66a12ebc8>
+    <matplotlib.axes._subplots.AxesSubplot at 0x1f2e0bb18c8>
 
 
 
@@ -1069,3 +1069,239 @@ check_model_fit(svm, X_test_std, y_test)
 This is more accurate than the model that didn't use the rbf kernel trick - it did classify some of the employees in the Left category. However, accuracy is still much lower for the left category. From looking at the data distribution, we have much less data for employees in the "left" category, so the lower accuracy is not surprising.
 
 The next step will be training k-Nearest Neighbours, which I'll do tomorrow.
+
+## 10 July 2020 - k-Nearest Neighbours and Random Forests
+Today I'm going to continue analysing the employee retention dataset using the k-Nearest Neighbours and Random Forest algorithms.
+
+We will start with sklearn's KNeighborsClassifier.
+
+
+```python
+# Print function info
+from sklearn.neighbors import KNeighborsClassifier
+KNeighborsClassifier?
+```
+
+
+```python
+# Train the KNN classifier with n_neighbours = 3 and compute the accuracy and decision regions
+knn = KNeighborsClassifier(n_neighbors=3)
+knn.fit(X_train_std, y_train)
+check_model_fit(knn, X_test_std, y_test)
+```
+
+    total accuracy = 90.9%
+    
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th colspan="2" halign="left">predictions</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="2" valign="top">actual</th>
+      <th>0</th>
+      <td>3203</td>
+      <td>213</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>198</td>
+      <td>886</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+    
+    percent accuracy score per class:
+    left = 0 : 93.76%
+    left = 1 : 81.73%
+    
+    
+
+    C:\Users\MateMalice\.conda\envs\machine-learning\lib\site-packages\mlxtend\plotting\decision_regions.py:249: MatplotlibDeprecationWarning: Passing unsupported keyword arguments to axis() will raise a TypeError in 3.3.
+      ax.axis(xmin=xx.min(), xmax=xx.max(), y_min=yy.min(), y_max=yy.max())
+    
+
+
+![png](output_38_4.png)
+
+
+### Discussion
+There is an increase in accuracy with this model compared to the SVM model, but the decision region plot suggests overfitting.
+
+**Indicators of overfitting apparent from the graph:**
+- Hard, choppy decision boundaries.
+- Small pockets yellow around the place.
+
+**How to reduce overfitting**
+We need to soften the decision boundary - we do this by increasing the number of nearest neighbours.
+
+Let's try a KNN model with n_neighbors = 25.
+
+
+```python
+knn = KNeighborsClassifier(n_neighbors=25)
+knn.fit(X_train_std, y_train)
+check_model_fit(knn, X_test_std, y_test)
+```
+
+    total accuracy = 91.6%
+    
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th colspan="2" halign="left">predictions</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="2" valign="top">actual</th>
+      <th>0</th>
+      <td>3290</td>
+      <td>126</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>254</td>
+      <td>830</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+    
+    percent accuracy score per class:
+    left = 0 : 96.31%
+    left = 1 : 76.57%
+    
+    
+
+    C:\Users\MateMalice\.conda\envs\machine-learning\lib\site-packages\mlxtend\plotting\decision_regions.py:249: MatplotlibDeprecationWarning: Passing unsupported keyword arguments to axis() will raise a TypeError in 3.3.
+      ax.axis(xmin=xx.min(), xmax=xx.max(), y_min=yy.min(), y_max=yy.max())
+    
+
+
+![png](output_40_4.png)
+
+
+### Discussion
+The decision boundaries are less choppy and there are fewer random pockets of yellow. The accuracy for the left class is less than the previous model's, but we would need to use a method like k-fold cross validation to decide if there's a significant difference between the models.
+
+**Note**: Increasing n_neighbours does not affect training time (training just involves the model memorising the data), but does significantly increase prediction time. 
+
+
+## Random Forest Training
+We will try an ensemble model - random forest - with 50 decision trees and a max depth of five.
+
+
+```python
+# Import and train the model - check the fit
+from sklearn.ensemble import RandomForestClassifier
+forest = RandomForestClassifier(n_estimators=50, max_depth=5, random_state=1)
+forest.fit(X_train, y_train)
+check_model_fit(forest, X_train, y_train)
+```
+
+    total accuracy = 92.4%
+    
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th colspan="2" halign="left">predictions</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="2" valign="top">actual</th>
+      <th>0</th>
+      <td>7911</td>
+      <td>101</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>693</td>
+      <td>1794</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+    
+    percent accuracy score per class:
+    left = 0 : 98.74%
+    left = 1 : 72.14%
+    
+    
+
+    C:\Users\MateMalice\.conda\envs\machine-learning\lib\site-packages\mlxtend\plotting\decision_regions.py:249: MatplotlibDeprecationWarning: Passing unsupported keyword arguments to axis() will raise a TypeError in 3.3.
+      ax.axis(xmin=xx.min(), xmax=xx.max(), y_min=yy.min(), y_max=yy.max())
+    
+
+
+![png](output_42_4.png)
+
+
+### Discussion
+The decision boundaries are axis-parallel. Accuracy seems decent (compared to the previous models and noting that the data is uneven), but let's look at one of the decision trees to see what is happening. We can access the trees using the estimators_attribute of the model.
+
+
+```python
+from sklearn.tree import export_graphviz
+import graphviz
+dot_data = export_graphviz(forest.estimators_[0], out_file=None, feature_names=features, class_names=['no', 'yes'], filled=True, rounded=True, special_characters=True)
+graph = graphviz.Source(dot_data)
+graph
+```
+
+
+
+
+![svg](output_44_0.svg)
+
+
+
+### Discussion
+Each path is limited to five nodes due to the depth setting. Orange boxes represent "no" predictions (i.e. has not left), whilst blue ones represent the "left" group (yes). The shade of each box is related to the "gini" value and represents the confidence level. Gini closer to zero represents higher confidence.
+
+As discussed above re: random forests, this tree picks features at each step and makes a decision based on whether a condition is true or false. At the start, we check if last evaluation was less than 0.575 and split the samples based on that. For the samples with a higher last evaluation value, we check if satisfaction level is less than 0.115. If so, then a "yes" (i.e. left the company) decision is made - this has a gini value of zero, i.e. high confidence. We can see that last_evaluation <= 0.575 and satisfaction_level <= 0.115 is within the "left" decision boundary of the graph above. However, for a higher satisfaction_level than 0.115, a "no" decision is made but with a lower confidence level (0.199). This means that the process continues - again, the tree splits the data and makes decisions based on true/false conditions. This continues up to a depth of five.
+
+The sklearn libraries automatically choose the splits that maximise information gain.
