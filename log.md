@@ -382,3 +382,11 @@ Kmean.predict(second_test)
 **Thoughts**: This dataset is unbalanced in terms of the distribution between the "left" and "remained" categories - we have significantly more data for the employees that haven't left. This has clearly affected the analysis. When using a linear SVM, all the predictions came back as "remained". A kernel trick did make the predictions more accurate, but the accuracy was still much higher for "remained" employees. It seems that the more data you have and the more balanced it is with respect to the target features, the easier it might be to develop an accurate model. I will be checking this hypothesis as I proceed through the various machine learning materials.
 
 **Link to work:** See [data_hr_analytics_packt_tutorial.md](https://github.com/MateMalice/100-days-of-code/blob/master/data_hr_analytics_packt_tutorial.md) after the 9 July 2020 heading and up to the SVM section and just before the k-Nearest Neighbours section.
+
+
+### Day 10: 10 July 2020
+**Today's Progress**: Today, I continued with the HR Data Analytics exercise (the employee retention problem), though I used the k-nearest neighbours and random forest algorithms. I learned how to make predictions on test data using these algorithms and how to use the sklearn modules relating to these algorithms.
+
+**Thoughts**: The k-nearest neighbours example with a small amount of neighbours (n_neighbors=3) showed overfitting - the decision boundaries were hard, for example, and there were small pockets all over the place. This might be useful to keep in mind when working with this algorithm in future. When n_neighbors was increased to 25, accuracy decreased but so did overfitting. I will need to do the validation exercise (next) to learn the impact of the accuracy difference. It was also interesting to look at a single decision tree in a random forest, which demonstrated how the algorithm works. 
+
+**Link to work:** See [data_hr_analytics_packt_tutorial.md](https://github.com/MateMalice/100-days-of-code/blob/master/data_hr_analytics_packt_tutorial.md) after the 9 July 2020 heading and up to the random forest section and just before the validation section.
