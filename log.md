@@ -389,4 +389,12 @@ Kmean.predict(second_test)
 
 **Thoughts**: The k-nearest neighbours example with a small amount of neighbours (n_neighbors=3) showed overfitting - the decision boundaries were hard, for example, and there were small pockets all over the place. This might be useful to keep in mind when working with this algorithm in future. When n_neighbors was increased to 25, accuracy decreased but so did overfitting. I will need to do the validation exercise (next) to learn the impact of the accuracy difference. It was also interesting to look at a single decision tree in a random forest, which demonstrated how the algorithm works. 
 
-**Link to work:** See [data_hr_analytics_packt_tutorial.md](https://github.com/MateMalice/100-days-of-code/blob/master/data_hr_analytics_packt_tutorial.md) after the 9 July 2020 heading and up to the random forest section and just before the validation section.
+**Link to work:** See [data_hr_analytics_packt_tutorial.md](https://github.com/MateMalice/100-days-of-code/blob/master/data_hr_analytics_packt_tutorial.md) after the 9 July 2020 heading and up to the random forest section.
+
+
+### Day 11: 12 July 2020
+**Today's Progress**: Today, I finished the HR Data Analytics exercise. This involved using k-fold cross-validation to determine model accuracy, tuning hyperparameters using validation curves, dimensionality reduction and using trained models to make data-driven business decisions. 
+
+**Thoughts**: I enjoyed this part of the exercise, especially the validation parts, as now I know how to use sklearn to determine the best model parameters to use for classification models. 
+
+**Link to work:** See [hr_analytics_employee_retention_problem.ipynb](https://github.com/MateMalice/100-days-of-code/blob/master/hr_analytics_employee_retention_problem.ipynb) for the entire notebook for the exercise. The last part after random forests (and starting with validation) represents today's progress.
