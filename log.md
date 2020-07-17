@@ -398,3 +398,11 @@ Kmean.predict(second_test)
 **Thoughts**: I enjoyed this part of the exercise, especially the validation parts, as now I know how to use sklearn to determine the best model parameters to use for classification models. 
 
 **Link to work:** See [hr_analytics_employee_retention_problem.ipynb](https://github.com/MateMalice/100-days-of-code/blob/master/hr_analytics_employee_retention_problem.ipynb) for the entire notebook for the exercise. The last part after random forests (and starting with validation) represents today's progress.
+
+
+### Days 12 and 13: 16-17 July 2020
+**Today's Progress**: This work was split over two days as I got interrupted by something urgent and important. I continued with the Jupyter Data Science Packt tutorial - the topic covered was web scraping using Python. I scraped interest rate and population data from Wikipedia and Worldometer. I saved the data as a CSV, so that I can use it for tomorrow's exercise, which will cover interactive visualisations using Jupyter.
+
+**Thoughts**: Although I had done similar things previously using C# and Selenium, it was good to learn how to do it in Python, given the benefits of using Jupyter Notebooks for this kind of work. I now know how to scrape web data using a range of languages and frameworks, including C# and Selenium, NodeJS and Python, which will allow me to choose the most appropriate tool for the job.
+
+**Link to work:** See [web-scraping-tutorial.ipynb](https://github.com/MateMalice/100-days-of-code/blob/master/web-scraping-tutorial.ipynb) for the entire notebook for the exercise. 
