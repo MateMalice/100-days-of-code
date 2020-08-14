@@ -406,3 +406,10 @@ Kmean.predict(second_test)
 **Thoughts**: Although I had done similar things previously using C# and Selenium, it was good to learn how to do it in Python, given the benefits of using Jupyter Notebooks for this kind of work. I now know how to scrape web data using a range of languages and frameworks, including C# and Selenium, NodeJS and Python, which will allow me to choose the most appropriate tool for the job.
 
 **Link to work:** See [web-scraping-tutorial.ipynb](https://github.com/MateMalice/100-days-of-code/blob/master/web-scraping-tutorial.ipynb) for the entire notebook for the exercise. 
+
+### Day 14: 14 August 2020
+**Today's Progress**: Unfortunately, I took a short break from this challenge due to illness, work and other pressures. Those have now eased, so I am getting back into it. I'm picking up where I left off - Day 14. Today, I continued with the Packt Machine Learning for Penetration Testing exercise and used logistic regression and a decision tree algorithm to develop a phishing domain detection model.
+
+**Thoughts**: This exercise reminded me how easy it is to perform simple classification tasks when you already have data that has been labelled and processed. It seems that one of the hardest and most time-consuming aspects of data science is getting good-quality data and keeping data collections clean when you're continually feeding in new data.
+
+**Link to work:** See [PhishingDetection.ipynb](https://github.com/MateMalice/100-days-of-code/blob/master/PhishingDetection.ipynb) for the entire notebook for the exercise.
