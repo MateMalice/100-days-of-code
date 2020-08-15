@@ -413,3 +413,11 @@ Kmean.predict(second_test)
 **Thoughts**: This exercise reminded me how easy it is to perform simple classification tasks when you already have data that has been labelled and processed. It seems that one of the hardest and most time-consuming aspects of data science is getting good-quality data and keeping data collections clean when you're continually feeding in new data.
 
 **Link to work:** See [PhishingDetection.ipynb](https://github.com/MateMalice/100-days-of-code/blob/master/PhishingDetection.ipynb) for the entire notebook for the exercise.
+
+
+### Day 15: 15 August 2020
+**Today's Progress**: Today, I worked on ways to control Jupyter servers remotely whilst still maintaining the requisite level of authentication, etc. I played with hybrid cloud connectors and AzureAD Application Proxy. I also spent time trying to get CUDA and Docker working in WSL2.
+
+**Thoughts**: These days, it is very easy to publish an app that uses on-prem resources whilst still maintaining strong access controls.
+
+**Link to work:** Much of today was spent configuring and adjusting cloud infra & apps.
